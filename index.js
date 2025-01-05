@@ -1,6 +1,6 @@
 const { Client, GatewayIntentBits } = require('discord.js');
-const MarkovGen = require('markov-generator');
-require('dotenv').config(); // .envファイルにトークンを格納する場合
+const Markov = require('markov-strings');
+require('dotenv').config();
 
 const client = new Client({
     intents: [
@@ -10,8 +10,8 @@ const client = new Client({
     ]
 });
 
-const TOKEN = process.env.BOT_TOKEN; // ボットのトークンを.envファイルから取得
-const CHANNEL_ID = process.env.CHANNEL_ID; // メッセージ履歴を取得するチャンネルのID
+const TOKEN = process.env.BOT_TOKEN;
+const CHANNEL_ID = process.env.CHANNEL_ID;
 
 client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}`);
@@ -29,27 +29,19 @@ client.on('messageCreate', async (message) => {
 
         let messages = [];
         try {
-            let fetchedMessages = await channel.messages.fetch({ limit: 100 }); // 最大100件
+            const fetchedMessages = await channel.messages.fetch({ limit: 100 });
             messages = fetchedMessages
                 .map(msg => msg.content)
                 .filter(msg => msg.length > 5);
-            console.log('メッセージ履歴:', messages);
-
-        } 
-        catch (err) {
+        } catch (err) {
             console.error('メッセージ取得エラー:', err);
             message.channel.send('メッセージ履歴の取得に失敗しました。');
             return;
         }
 
-        // マルコフ連鎖モデルの作成
-        const markov = new MarkovGen({
-            input: messages,
-            minLength: 5
-        });
-
-        const generatedMessage = markov.makeChain();
-        message.channel.send(`生成されたメッセージ: ${generatedMessage}`);
+        const markov = new Markov({ input: messages, stateSize: 2 });
+        const generatedMessage = markov.generate({ maxTries: 100, filter: result => result.score > 50 });
+        message.channel.send(`生成されたメッセージ: ${generatedMessage.string}`);
     }
 });
 

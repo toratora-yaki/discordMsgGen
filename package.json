@@ -19,6 +19,6 @@
   "dependencies": {
     "discord.js": "^14.17.2",
     "dotenv": "^16.4.7",
-    "markov-generator": "^1.2.3"
+    "markov-strings": "^3.0.2"
   }
 }
