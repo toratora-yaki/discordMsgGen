@@ -1,0 +1,24 @@
+{
+  "name": "discordmsggen",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toratora-yaki/discordMsgGen.git"
+  },
+  "author": "toratora-yaki",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/toratora-yaki/discordMsgGen/issues"
+  },
+  "homepage": "https://github.com/toratora-yaki/discordMsgGen#readme",
+  "description": "",
+  "dependencies": {
+    "discord.js": "^14.17.2",
+    "dotenv": "^16.4.7",
+    "markov-generator": "^1.2.3"
+  }
+}
