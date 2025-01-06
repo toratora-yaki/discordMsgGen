@@ -1,3 +1,4 @@
+require = require('esm')(module); // esm パッケージを使う
 const { Client, GatewayIntentBits } = require('discord.js');
 const Markov = require('markov-strings');
 require('dotenv').config();

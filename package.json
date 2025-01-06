@@ -19,6 +19,8 @@
   "dependencies": {
     "discord.js": "^14.17.2",
     "dotenv": "^16.4.7",
+    "esm": "^3.2.25",
+    "lodash": "^4.17.21",
     "markov-strings": "^3.0.2"
   }
 }
